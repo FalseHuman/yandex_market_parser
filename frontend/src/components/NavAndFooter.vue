@@ -5,7 +5,11 @@
         <v-sheet class="pa-4">
           <div v-if="mini === false">
             <v-avatar class="mb-4" color="grey darken-1" size="64">
-              <v-img lazy-src="http://localhost:8080/favicon.png" src="http://localhost:8080/favicon.png" alt="http://localhost:8080/favicon.png"></v-img>
+              <v-img
+                :lazy-src="this.$store.state.backend_url + 'static/favicon.ico'"
+                :src="this.$store.state.backend_url + 'static/favicon.ico'"
+                :alt="this.$store.state.backend_url + 'static/favicon.ico'"
+              ></v-img>
             </v-avatar>
 
             <div v-if="user.first_name === '' && user.last_name === ''" class="mb-2">
@@ -29,7 +33,11 @@
           </div>
           <div v-else style="margin-left: -10px">
             <v-avatar color="grey darken-1" size="44">
-              <v-img lazy-src="http://localhost:8080/favicon.png" src="http://localhost:8080/favicon.png" alt="http://localhost:8080/favicon.png"></v-img>
+              <v-img
+                :lazy-src="this.$store.state.backend_url + 'static/favicon.ico'"
+                :src="this.$store.state.backend_url + 'static/favicon.ico'"
+                :alt="this.$store.state.backend_url + 'static/favicon.ico'"
+              ></v-img>
             </v-avatar>
           </div>
         </v-sheet>

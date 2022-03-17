@@ -9,7 +9,11 @@
         <v-col>
           <p style="text-align: center; margin: 0">
             <v-avatar color="grey darken-1" size="100">
-              <v-img lazy-src="http://localhost:8080/favicon.png" src="http://localhost:8080/favicon.png" alt="http://localhost:8080/favicon.png"></v-img>
+              <v-img
+                :lazy-src="this.$store.state.backend_url + 'static/favicon.ico'"
+                :src="this.$store.state.backend_url + 'static/favicon.ico'"
+                :alt="this.$store.state.backend_url + 'static/favicon.ico'"
+              ></v-img>
             </v-avatar>
           </p>
         </v-col>
@@ -26,12 +30,7 @@
               <v-row justify="center">
                 <v-dialog v-model="dialog" persistent max-width="600px">
                   <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                      color="#fc0"
-                      dark
-                      v-bind="attrs"
-                      v-on="on"
-                      @click="userform()"
+                    <v-btn color="#fc0" dark v-bind="attrs" v-on="on" @click="userform()"
                       >Pедактировать</v-btn
                     >
                   </template>

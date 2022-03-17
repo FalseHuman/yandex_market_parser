@@ -8,7 +8,7 @@
             style="background-color: #fc0"
           >
             <v-toolbar-title class="white--text mb-6">
-              <h4>Регистрация в Web WhatsApp API</h4>
+              <h4>Регистрация в Парсер Яндекс.Маркет</h4>
             </v-toolbar-title>
           </v-toolbar>
           <v-card>
