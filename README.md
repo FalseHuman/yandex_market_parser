@@ -44,8 +44,8 @@ $ cd frontend
 $ npm install
 $ npm run serve
 ```
-##Docker
-###В корне проекта создать .env.dev и прописать свои настройки
+## Docker
+### В корне проекта создать .env.dev и прописать свои настройки
 ```bash
 # Data Base
 POSTGRES_DB=имя_твоей_бд
