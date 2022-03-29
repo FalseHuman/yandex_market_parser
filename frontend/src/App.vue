@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     themeBrowser() {
-      //console.log(adapter.browserDetails.browser);
+      //// console.log(adapter.browserDetails.browser);
       if (window.matchMedia) {
         if (
           window.matchMedia("(prefers-color-scheme: dark)").matches &&

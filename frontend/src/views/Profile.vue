@@ -129,7 +129,7 @@ export default {
       this.userData[key] = value;
     },
     updateUser() {
-      //console.log(this.row)
+      //// console.log(this.row)
       var self = this;
       $.ajax({
         url: this.$store.state.backend_url + "api/update_profile/",
@@ -139,7 +139,7 @@ export default {
           location.reload();
         },
         error: function (response) {
-          //console.log(this.data);
+          //// console.log(this.data);
           self.error = response.responseJSON;
           /*           for (let key in err) {
             alert(key, err[key].toString());

@@ -1,3 +1,4 @@
+from email.headerregistry import Group
 from django.shortcuts import render
 from rest_framework import generics, viewsets, parsers, views, permissions
 from . import models, serializer
@@ -12,7 +13,8 @@ from rest_framework import status
 from uuid import uuid4
 from django.core.mail import send_mail
 from core.settings import EMAIL_HOST_USER
-# Create your views here.
+from django.utils.datastructures import MultiValueDictKeyError
+
 
 class TokenGet(APIView):
     def post(self, request, format=None):
@@ -25,11 +27,11 @@ class TokenGet(APIView):
 
 class CheckEmail(APIView):
     def post(self, request, format=None):
-        #print(User.objects.get(email=request.data['email']))
+        # print(User.objects.get(email=request.data['email']))
         try:
             user = User.objects.get(email=request.data['email'])
             rand_token = uuid4()
-            TokenReset.objects.create(token_for_user= user, token=rand_token)
+            TokenReset.objects.create(token_for_user=user, token=rand_token)
             subject, message = "Восстановление пароля", f"Здравствуйте, {user.username} \nТокен для восстановления пароля - {rand_token} Вставьте токен в форму без пробелов\nЕсли это были не вы просто проигнорируйте данное сообщение"
             send_mail(
                 subject,
@@ -42,6 +44,7 @@ class CheckEmail(APIView):
         except User.DoesNotExist:
             return Response({"email": "Пользователя с таким адресом эл.почты не существует или некорректно введён адрес."}, status=status.HTTP_400_BAD_REQUEST)
 
+
 class CheckToken(APIView):
     def post(self, request, format=None):
         try:
@@ -51,6 +54,7 @@ class CheckToken(APIView):
         except TokenReset.DoesNotExist:
             return Response({"token": "Токен введён не правильно."}, status=status.HTTP_400_BAD_REQUEST)
 
+
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated, ]
     queryset = User.objects.all()
@@ -59,6 +63,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         #print('user', self.request.user)
         return User.objects.filter(username=self.request.user)
+
 
 class UpdateProfileView(generics.UpdateAPIView):
     queryset = User.objects.all()
@@ -74,6 +79,19 @@ class UpdateProfileView(generics.UpdateAPIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class GroupView(viewsets.ModelViewSet):
+    """ CRUD Group
+    """
+    permission_classes = [permissions.IsAuthenticated, ]
+    serializer_class = serializer.GroupSerializer
+    def get_queryset(self):
+        return GroupLink.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+
 
 class LinkView(viewsets.ModelViewSet):
     """ CRUD Links
@@ -81,8 +99,35 @@ class LinkView(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated, ]
     serializer_class = serializer.LinkSerializer
 
+
+
     def get_queryset(self):
-        return Link.objects.filter(user=self.request.user)
+        params = self.request.query_params.copy()
+        data = {
+                'user': self.request.user,
+            }
+        for i in params:
+            print(params[i]!='null')
+            try:
+                if params[i]!= 'null' and params[i]!='':
+                    data[i] = params[i]
+            except MultiValueDictKeyError:
+                pass
+        print(data)
+        return Link.objects.filter(**data)
+
+    def perform_create(self, serializer):
+        #print(self.request)
+        serializer.save(user=self.request.user)
+
+class AnalogLinkView(viewsets.ModelViewSet):
+    """ CRUD AnalogLinks
+    """
+    permission_classes = [permissions.IsAuthenticated, ]
+    serializer_class = serializer.AnalogLinkSerializer
+
+    def get_queryset(self):
+        return AnalogLink.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

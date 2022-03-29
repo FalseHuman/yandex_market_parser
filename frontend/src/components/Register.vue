@@ -76,7 +76,7 @@ export default {
         this.$router.push("/login");
       }).fail((response) => {
         this.error = response.responseJSON;
-        console.log(this.error);
+        // console.log(this.error);
       });
     },
   },

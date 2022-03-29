@@ -74,6 +74,7 @@ export default {
     "cols",
     "model",
     "error",
+    'search'
   ],
   data: () => ({
     input: "",
@@ -96,16 +97,16 @@ export default {
       this.input = this.model;
     }
     /* if(this.type_input === 'boolean'){
-      console.log(this.key_label, this.input)
+      // console.log(this.key_label, this.input)
     } */
     this.inputSend(this.type_input);
   },
   methods: {
     inputSend(type_input) {
           if(type_input === 'boolean'){
-      console.log(this.key_label, this.input)
+      // console.log(this.key_label, this.input)
     }
-      this.$emit("changeInput", this.key_label, this.input);
+      this.$emit("changeInput", this.key_label, this.input, this.search);
     },
   },
 };

@@ -106,9 +106,9 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'CHANGE_YOUR_DATABASE_NAME',
-        'USER': 'CHANGE_USER', 
-        'PASSWORD': 'CHANGE_YOUR_PASSWORD'
+        'NAME': 'yandex_market',#'CHANGE_YOUR_DATABASE_NAME',
+        'USER': 'postgres',#'CHANGE_USER', 
+        'PASSWORD': 'Rinat19861'#'CHANGE_YOUR_PASSWORD'
     }
 }
 

@@ -5,8 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    backend_url: 'http://localhost:8000/',
-    domain_url: 'http://localhost:8000/'
+    backend_url: 'https://parser-yandex-market.herokuapp.com/',
+    domain_url: 'https://parser-yandex-market.herokuapp.com/'
   },
   mutations: {
   },

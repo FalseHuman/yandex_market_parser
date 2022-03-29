@@ -44,6 +44,28 @@ $ cd frontend
 $ npm install
 $ npm run serve
 ```
+##Docker
+###В корне проекта создать .env.dev и прописать свои настройки
+```bash
+# Data Base
+POSTGRES_DB=имя_твоей_бд
+POSTGRES_ENGINE=django.db.backends.postgresql
+POSTGRES_USER=имя_твоего_пользователя
+POSTGRES_PASSWORD=пароль_бд
+POSTGRES_HOST=db
+POSTGRES_PORT=5432
+
+#Email
+
+EMAIL_HOST_USER=твой_адрес_email
+EMAIL_HOST_PASSWORD=пароль_почты
+```
+## ❗❗❗Ремарка по поводу профиля Chrome ❗❗❗См. выше. Далее запуск контейнера
+```bash
+$ cd docker
+$ docker-compose up --build
+
+```
 
 ## СУБД PostgreSQL
 Ссылка, как установить для [Windows](https://www.youtube.com/watch?v=yYJ74Sc7nw8)

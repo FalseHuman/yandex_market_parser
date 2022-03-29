@@ -150,7 +150,7 @@ export default {
         }
       ).fail((response) => {
         this.error = response.responseJSON;
-        console.log(this.error);
+        // console.log(this.error);
       });
     },
     sendNewPassword() {
@@ -162,7 +162,7 @@ export default {
         }
       ).fail((response) => {
         this.error = response.responseJSON;
-        //console.log(this.error)
+        //// console.log(this.error)
       });
     },
   },
